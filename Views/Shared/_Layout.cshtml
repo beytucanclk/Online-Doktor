@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="author" content="Jthemes"/>
+    <meta name="description" content="MedService - Medical & Medical Health Landing Page Template"/>
+    <meta name="keywords" content="Responsive, HTML5 Template, Jthemes, One Page, Landing, Medical, Health, Healthcare, Doctor, Clinic, Care, Hospital">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- SITE TITLE -->
+    <title>MedService - Medical & Medical Health Landing Page Template</title>
+    <!-- FAVICON AND TOUCH ICONS  -->
+    <link rel="shortcut icon" href="~/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/images/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/images/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/images/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" href="~/images/apple-touch-icon.png">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+    <!-- BOOTSTRAP CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FONT ICONS -->
+    <link href="~/css/use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" rel="stylesheet" crossorigin="anonymous">
+    <link href="~/css/flaticon.css" rel="stylesheet">
+    <!-- PLUGINS STYLESHEET -->
+    <link href="~/css/menu.css" rel="stylesheet">
+    <link id="effect" href="~/css/dropdown-effects/fade-down.css" media="all" rel="stylesheet">
+    <link href="~/css/magnific-popup.css" rel="stylesheet">
+    <link href="~/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/css/owl.theme.default.min.css" rel="stylesheet">
+    <link href="~/css/animate.css" rel="stylesheet">
+    <link href="~/css/jquery.datetimepicker.min.css" rel="stylesheet">
+    <!-- TEMPLATE CSS -->
+    <link href="~/css/style.css" rel="stylesheet">
+    <!-- RESPONSIVE CSS -->
+    <link href="~/css/responsive.css" rel="stylesheet">
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+<!-- PRELOADER SPINNER
+============================================= -->
+<div id="loader-wrapper">
+    <div id="loader">
+        <div class="loader-inner"></div>
+    </div>
+</div>
+<!-- PAGE CONTENT
+============================================= -->
+<div id="page" class="page">
+<!-- HEADER
+============================================= -->
+<header id="header-2" class="header">
+    <!-- MOBILE HEADER -->
+    <div class="wsmobileheader clearfix">
+        <a id="wsnavtoggle" class="wsanimated-arrow">
+            <span></span>
+        </a>
+        <span class="smllogo">
+            <img src="~/images/gelisim-universitesi-logo-3-11_7cd30541ed44493fbd5a5e1ad397644f.png" width="180" height="40" alt="mobile-logo"/>
+        </span>
+        <a href="tel:123456789" class="callusbtn">
+            <i class="fas fa-phone"></i>
+        </a>
+    </div>
+    <!-- HEADER WIDGETS -->
+    <div class="hero-widget clearfix">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+
+
+                <!-- LOGO IMAGE -->
+                <!-- For Retina Ready displays take a image with double the amount of pixels that your image will be displayed (e.g 360 x 80 pixels) -->
+                <div class="col-md-5 col-xl-6">
+                    <div class="desktoplogo">
+                        <a asp-controller="Home" asp-action="Index">
+                            <img src="~/images/gelisim-universitesi-logo-3-11_7cd30541ed44493fbd5a5e1ad397644f.png" width="180" height="40" alt="header-logo">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- WIDGETS -->
+                <div class="col-md-7 col-xl-6">
+                    <div class="row">
+
+                        <!-- Emergency Cases Widget 
+                        <div class="col-md-6">
+                            <div class="header-widget icon-xs">
+                                <span class="flaticon-039-emergency-call-1 blue-color"></span>
+                                <div class="header-widget-txt">
+                                    <p>Emergency Cases</p> 
+                                    <p class="header-widget-phone steelblue-color">1-800-123-4560</p>
+                                </div>
+                            </div>
+                        </div>-->
+
+                        <!-- Working Hours Widget -->
+                        <div class="col-md-6">
+                            <div class="header-widget icon-xs">
+                                <span class="flaticon-092-clock blue-color"></span>
+                                <div class="header-widget-txt">
+                                    <p class="txt-400">09.00-18.00 saat</p>
+                                    <p class="lightgrey-color">7/24</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Location Widget -->
+                        <div class="col-md-6">
+                            <div class="header-widget icon-xs">
+                                <span class="flaticon-021-hospital-9 blue-color"></span>
+                                <div class="header-widget-txt">
+                                    <p class="txt-400">istanbul,Türkiye,</p>
+                                    <p class="lightgrey-color">mustafa kemal paşa,Avcılar</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div> <!-- END WIDGETS -->
+
+            </div>
+        </div>
+    </div> <!-- END HEADER WIDGETS -->
+    <!-- NAVIGATION MENU -->
+    <div class="wsmainfull menu clearfix">
+        <div class="wsmainwp clearfix">
+
+            <!-- LOGO IMAGE -->
+            <!-- For Retina Ready displays take a image with double the amount of pixels that your image will be displayed (e.g 360 x 80 pixels) -->
+            <div class="desktoplogo">
+                <a href="#hero-4">
+                    <img src="~/images/gelisim-universitesi-logo-3-11_7cd30541ed44493fbd5a5e1ad397644f.png" width="180" height="40" alt="header-logo">
+                </a>
+            </div>
+
+            <!-- MAIN MENU -->
+            <nav class="wsmenu clearfix">
+                <ul class="wsmenu-list">
+
+                    <li class="nl-simple" aria-haspopup="true">
+                        <a asp-action="Index" asp-controller="Home">Ana sayfa</a>
+                    </li>
+                    <li class="nl-simple" aria-haspopup="true">
+                        <a asp-action="Doctors" asp-controller="Home">Doktorlar</a>
+                    </li>
+
+                    <!-- HIDDEN NAVIGATION MENU BUTTON -->
+                    <li class="nl-simple" aria-haspopup="true">
+                        <a href="#">Giriş</a>
+                    </li>
+
+                </ul>
+
+            </nav> <!-- END MAIN MENU -->
+
+        </div>
+    </div> <!-- END NAVIGATION MENU -->
+</header>
+<!-- END HEADER -->
+@RenderBody()
+<!-- FOOTER-1
+============================================= -->
+<footer id="footer-1" class="wide-40 footer division">
+    <div class="container">
+        <!-- FOOTER CONTENT -->
+        <div class="row">
+
+
+            <!-- FOOTER INFO -->
+            <div class="col-md-6 col-lg-3">
+                <div class="footer-info mb-40">
+
+                    <!-- Footer Logo -->
+                    <!-- For Retina Ready displays take a image with double the amount of pixels that your image will be displayed (e.g 360 x 80  pixels) -->
+                    <img src="~/images/gelisim-universitesi-logo-3-11_7cd30541ed44493fbd5a5e1ad397644f.png" width="180" height="40" alt="footer-logo">
+
+                    <!-- Text -->
+                    <p class="p-sm mt-20">
+                       Sağlık randevularınızı almak artık daha önce hiç olmadığı kadar kolay ve hızlı. Sağlık Hastane Randevu Otomasyon Sistemi ile sağlık hizmetlerine erişimde yeni bir çağa adım atın.
+                    </p>
+
+                    <!-- Social Icons -->
+                    <div class="footer-socials-links mt-20">
+                        <ul class="foo-socials text-center clearfix">
+
+                            <li>
+                                <a href="#" class="ico-facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="ico-twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="ico-google-plus">
+                                    <i class="fab fa-google-plus-g"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="ico-tumblr">
+                                    <i class="fab fa-tumblr"></i>
+                                </a>
+                            </li>
+
+                            <!--
+                            <li><a href="#" class="ico-behance"><i class="fab fa-behance"></i></a></li>	
+                            <li><a href="#" class="ico-dribbble"><i class="fab fa-dribbble"></i></a></li>											
+                            <li><a href="#" class="ico-instagram"><i class="fab fa-instagram"></i></a></li>	
+                            <li><a href="#" class="ico-linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+                            <li><a href="#" class="ico-pinterest"><i class="fab fa-pinterest-p"></i></a></li>									
+                            <li><a href="#" class="ico-youtube"><i class="fab fa-youtube"></i></a></li>											
+                            <li><a href="#" class="ico-vk"><i class="fab fa-vk"></i></a></li>
+                            <li><a href="#" class="ico-yelp"><i class="fab fa-yelp"></i></a></li>
+                            <li><a href="#" class="ico-yahoo"><i class="fab fa-yahoo"></i></a></li>
+                            -->
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- FOOTER CONTACTS -->
+            <div class="col-md-6 col-lg-3">
+                <div class="footer-box mb-40">
+
+                    <!-- Title -->
+                    <h5 class="h5-xs">Our Location</h5>
+
+                    <!-- Address -->
+                    <p>avcılar istanbul,</p>
+                    <p>istanbul turkey</p>
+
+                    <!-- Email -->
+                    <p class="foo-email mt-20">E: <a href="beytullahcr61@gmail.com">beytullahcr61@gmail.com</a></p>
+
+                    <!-- Phone -->
+                    <p>P: 05392146920</p>
+
+                </div>
+            </div>
+
+
+            <!-- FOOTER WORKING HOURS -->
+            <div class="col-md-6 col-lg-3">
+                <div class="footer-box mb-40">
+
+                    <!-- Title -->
+                    <h5 class="h5-xs">Working Time</h5>
+
+                    <!-- Working Hours -->
+                    <p class="p-tm">Mon - Wed - <span>00.00-24.00 PM </span></p>
+                    <p class="p-sm">Thursday - <span>00.00-24.00 PM</span></p>
+                    <p class="p-sm">Friday - <span>00.00-24.00 PM</span></p>
+                    <p class="p-sm">Sat - Sun - <span>CLOSE</span></p>
+
+                </div>
+            </div>
+
+
+            <!-- FOOTER PHONE NUMBER -->
+            <div class="col-md-6 col-lg-3">
+                <div class="footer-box mb-40">
+
+                    <!-- Title -->
+                    <h5 class="h5-xs">Emergency Cases</h5>
+
+                    <!-- Footer List -->
+                    <h5 class="h5-xl blue-color">05392146920</h5>
+
+                    <!-- Text -->
+                    <p class="p-sm mt-15">
+                       Bize kolayca ulaşabilirsiniz sağlıklı günler.
+                    </p>
+
+                </div>
+            </div>
+
+
+        </div> <!-- END FOOTER CONTENT -->
+        <!-- FOOTER COPYRIGHT -->
+        <div class="bottom-footer">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="footer-copyright">&copy; 2024 <span>ONLİNE DOKTOR</span>. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End container -->
+</footer> <!-- END FOOTER-1 -->
+</div> <!-- END PAGE CONTENT -->
+<!-- EXTERNAL SCRIPTS
+============================================= -->
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/modernizr.custom.js"></script>
+<script src="~/js/jquery.easing.js"></script>
+<script src="~/js/jquery.appear.js"></script>
+<script src="~/js/jquery.stellar.min.js"></script>
+<script src="~/js/menu.js"></script>
+<script src="~/js/sticky.js"></script>
+<script src="~/js/jquery.scrollto.js"></script>
+<script src="~/js/materialize.js"></script>
+<script src="~/js/owl.carousel.min.js"></script>
+<script src="~/js/jquery.magnific-popup.min.js"></script>
+<script src="~/js/imagesloaded.pkgd.min.js"></script>
+<script src="~/js/isotope.pkgd.min.js"></script>
+<script src="~/js/hero-form.js"></script>
+<script src="~/js/contact-form.js"></script>
+<script src="~/js/comment-form.js"></script>
+<script src="~/js/appointment-form.js"></script>
+<script src="~/js/jquery.datetimepicker.full.js"></script>
+<script src="~/js/jquery.validate.min.js"></script>
+<script src="~/js/jquery.ajaxchimp.min.js"></script>
+<script src="~/js/wow.js"></script>
+<!-- Custom Script -->
+<script src="~/js/custom.js"></script>
+<script> 
+			new WOW().init();
+		</script>
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!-- [if lt IE 9]>
+<script src="~/js/html5shiv.js" type="text/javascript"></script>
+<script src="~/js/respond.min.js" type="text/javascript"></script>
+<![endif] -->
+<!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information. -->
+<!--
+<script>
+			window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+			ga('create', 'UA-XXXXX-Y', 'auto');
+			ga('send', 'pageview');
+		</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+-->
+<!-- End Google Analytics -->
+<script src="~/js/changer.js"></script>
+<script defer src="~/js/styleswitch.js"></script>
+
+@RenderSection("Scripts", required: false)
+</body>
+</html>

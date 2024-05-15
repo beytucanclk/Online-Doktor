@@ -1,0 +1,358 @@
+@using Microsoft.Extensions.Primitives
+@model List<WebApplication1.Models.Entities.Doctor>
+
+@{
+    ViewBag.Title = "Randevu Al";
+    Layout = "_Layout";
+}
+@section Scripts
+{
+    <script>
+
+        // sayfa yüklendiğinde...
+        $(document).ready(function() {
+            GetDoctorDatas();
+        });
+        // doctor-select id'li select elementinde bir değişiklik olduğunda...
+        $("#doctor-select").change(function() {
+            GetDoctorDatas();
+        });
+
+        function GetDoctorDatas() {
+            // doctor-select id'li select elementinde seçilen değeri bir değişkene atıyoruz
+            var doctorId = $("#doctor-select").val();
+            // eğer doctorId değişkeni boş değilse
+            if (doctorId) {
+                $.ajax({
+                    url: "/Home/GetDoctor?doctorId=" + doctorId,
+                    type: "GET",
+                    success: function(data) {
+                        console.log("selected doctor datas: ", data);
+                        // gelen veriyi doctor değişkenine atıyoruz
+                        var doctorInfos = {
+                            fullname: data.fullname,
+                            speciality: data.speciality,
+                            phonenumber: data.phoneNumber,
+                            description: data.description
+                        };
+
+                        // doctor-fullname id'li elementin textini doctorInfos.fullname ile değiştiriyoruz
+                        $("#doctor-fullname").text(doctorInfos.fullname);
+                        // doctor-speciality id'li elementin textini doctorInfos.speciality ile değiştiriyoruz
+                        $("#doctor-speciality").text(doctorInfos.speciality);
+                        // doctor-phonenumber id'li elementin textini doctorInfos.phonenumber ile değiştiriyoruz
+                        $("#doctor-phonenumber").text(doctorInfos.phonenumber);
+                        // doctor-description id'li elementin textini doctorInfos.description ile değiştiriyoruz
+                        $("#doctor-description").text(doctorInfos.description);
+
+                        var workingTimes = {
+                            status: data.workingTimes.count > 0,
+                            pazartesi: data.workingTimes.monday,
+                            sali: data.workingTimes.tuesday,
+                            carsamba: data.workingTimes.wednesday,
+                            persembe: data.workingTimes.thursday,
+                            cuma: data.workingTimes.friday,
+                            cumartesi: data.workingTimes.saturday,
+                            pazar: data.workingTimes.sunday
+                        }
+
+                        // çalışma saati belirlenmise
+                        if (workingTimes.status) {
+                            // working-time-monday id'li elementin textini workingTimes.pazartesi ile değiştiriyoruz
+                            $("#working-time-monday").text(workingTimes.pazartesi);
+                            $("#working-time-tuesday").text(workingTimes.sali);
+                            $("#working-time-wednesday").text(workingTimes.carsamba);
+                            $("#working-time-thursday").text(workingTimes.persembe);
+                            $("#working-time-friday").text(workingTimes.cuma);
+                            $("#working-time-saturday").text(workingTimes.cumartesi);
+                            $("#working-time-sunday").text(workingTimes.pazar);
+                        } else {
+                            // çalışma saati belirlenmemişse
+                            // working-time-monday id'li elementin textini "Kapalı" ile değiştiriyoruz
+                            $("#working-time-monday").text("Kapalı");
+                            $("#working-time-tuesday").text("Kapalı");
+                            $("#working-time-wednesday").text("Kapalı");
+                            $("#working-time-thursday").text("Kapalı");
+                            $("#working-time-friday").text("Kapalı");
+                            $("#working-time-saturday").text("Kapalı");
+                            $("#working-time-sunday").text("Kapalı");
+                        }
+
+                    }
+                });
+            }
+        }
+
+        $('#appointment-form-submit-button').on("click", function(e) {
+            e.preventDefault();
+            var formDatas = {
+                doctor: $("#doctor-select").val(),
+                date: $("#datetimepicker").val(),
+                fullname: $(".name").val(),
+                email: $(".email").val()
+            };
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("SetAppointment", "Home")",
+                data: {
+                    doctorId: formDatas.doctor,
+                    appointmentDate: formDatas.date,
+                    patientFullname: formDatas.fullname,
+                    patientEmail: formDatas.email
+                },
+                success: function(data) {
+                    console.log(data);
+                    var html = "";
+                    if (data.approved) {
+                        var appointmentInfos = {
+                            doctorFullname: data.appointmentInfos.doctorFullname,
+                            doctorSpeciality: data.appointmentInfos.doctorSpeciality,
+                            appointmentDate: data.appointmentInfos.appointmentDate,
+                            patientFullname: data.appointmentInfos.patientFullname,
+                            patientEmail: data.appointmentInfos.patientEmail
+                        };
+                        html += `<span style="color:green">${data.message}<br>Randevu bilgisi: ${appointmentInfos.doctorFullname} - ${appointmentInfos.appointmentDate}<br>${appointmentInfos.patientFullname} - ${appointmentInfos.patientEmail}</span>`;
+                        $(".sending-msg").html(html);
+                    } else {
+                        html += `<span style="color: red">${data.message}</span>`;
+                        $(".sending-msg").html(html);
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+<!-- BREADCRUMB
+============================================= -->
+<div id="breadcrumb" class="division">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class=" breadcrumb-holder">
+
+                    <!-- Breadcrumb Nav -->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a asp-action="Index" asp-controller="Home">Ana sayfa</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Randevu Al</li>
+                        </ol>
+                    </nav>
+
+                    <!-- Title -->
+                    <h4 class="h4-sm steelblue-color">Make Appointment</h4>
+
+                </div>
+            </div>
+        </div> <!-- End row -->
+    </div> <!-- End container -->
+</div> <!-- END BREADCRUMB -->
+
+<!-- APPOINTMENT PAGE
+============================================= -->
+<div id="appointment-page" class="wide-60 appointment-page-section division">
+    <div class="container">
+        <div class="row">
+
+
+            <!-- SERVICE DETAILS -->
+            <div class="col-lg-8">
+                <div class="txt-block pr-30">
+
+                    <!-- Title -->
+                    <h3 class="h3-md steelblue-color">Book an Appointment</h3>
+
+                    <!-- Text -->
+                    <p>
+                        Sistemimizi kullanmak çok kolay! Web sitemize giriş yapın, istediğiniz doktoru seçin, uygun bir tarih ve saat belirleyin ve randevunuzu alın. Daha da kolay olamazdı! Sadece birkaç adımda sağlık randevunuzu hızlıca ayarlayabilirsiniz.
+                    </p>
+
+                    <!-- APPOINTMENT FORM -->
+                    <div id="appointment-form-holder" class="text-center">
+                        <form name="appointment-form" class="row appointment-form">
+
+                            <!-- Form Select -->
+                            <div id="input-doctor" class="col-md-12 input-doctor">
+                                <select id="doctor-select" name="doctor" class="custom-select doctor" required>
+                                    @{
+                                        StringValues doctorQuery = Context.Request.Query["doctorId"];
+                                        int doctorId = 0;
+                                        if (doctorQuery.Count > 0)
+                                        {
+                                            doctorId = Convert.ToInt32(doctorQuery[0]);
+                                        }
+                                    }
+                                    @if (doctorId > 0)
+                                    {
+                                        <option value="" disabled>Select Doctor</option>
+                                        foreach (var doctor in Model)
+                                        {
+                                            if (doctor.Id == doctorId)
+                                            {
+                                                <option value="@doctor.Id" selected>@doctor.Fullname (@doctor.Speciality)</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@doctor.Id">@doctor.Fullname (@doctor.Speciality)</option>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option value="" selected disabled>Select Doctor</option>
+                                        foreach (var doctor in Model)
+                                        {
+                                            <option value="@doctor.Id">@doctor.Fullname (@doctor.Speciality)</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+
+                            <!-- Contact Form Input -->
+                            <div id="input-date" class="col-lg-12">
+                                <input id="datetimepicker" type="text" name="date" class="form-control date" placeholder="Appointment Date" required>
+                            </div>
+
+                            <!-- Contact Form Input -->
+                            <div id="input-name" class="col-lg-12">
+                                <input type="text" name="name" class="form-control name" placeholder="Enter Your Name*" required>
+                            </div>
+
+                            <div id="input-email" class="col-lg-12">
+                                <input type="text" name="email" class="form-control email" placeholder="Enter Your Email*" required>
+                            </div>
+
+                            <!-- Contact Form Button -->
+                            <div class="col-lg-12 form-btn">
+                                <button id="appointment-form-submit-button" type="button" class="btn btn-blue blue-hover submit">Request an Appointment</button>
+                            </div>
+
+                            <!-- Contact Form Message -->
+                            <div class="col-lg-12 appointment-form-msg text-center">
+                                <div class="sending-msg">
+                                    <span class="loading"></span>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div> <!-- END APPOINTMENT FORM -->
+
+                    <!-- Text -->
+                    <p class="p-sm grey-color mb-30">
+                       Sistemimizi kullanmak çok kolay! Tek yapmanız gereken web sitemize giriş yapmak, istediğiniz doktoru seçmek ve uygun bir tarih ile saat belirlemek. Artık sağlık randevularınızı almak hiç bu kadar kolay olmamıştı!
+                    </p>
+
+
+                </div>
+            </div> <!-- END SERVICE DETAILS -->
+
+
+            <!-- SIDEBAR -->
+            <aside id="sidebar" class="col-lg-4">
+
+
+                <!-- TEXT WIDGET -->
+                <div id="txt-widget" class="sidebar-div mb-50">
+
+                    <!-- Title -->
+                    <h5 class="h5-sm steelblue-color">The Heart Of Clinic</h5>
+
+                    <!-- Head of Clinic -->
+                    <div class="txt-widget-unit mb-15 clearfix d-flex align-items-center">
+
+                        <!-- Avatar -->
+                        <div class="txt-widget-avatar">
+                            <img src="~/images/head-of-clinic.jpg" alt="testimonial-avatar">
+                        </div>
+
+                        <!-- Data -->
+                        <div class="txt-widget-data">
+                            <h5 id="doctor-fullname" class="h5-md steelblue-color">Dr. Jonathan Barnes</h5>
+                            <span id="doctor-speciality">Chief Medical Officer, Founder</span>
+                            <p id="doctor-phonenumber" class="blue-color">05392146920</p>
+                        </div>
+
+                    </div> <!-- End Head of Clinic -->
+
+                    <!-- Text -->
+                    <p id="doctor-description" class="p-sm">
+                        An enim nullam tempor sapien at gravida donec pretium ipsum porta justo
+                        integer at odiovelna vitae auctor integer congue magna purus
+                    </p>
+
+                    <!-- Button -->
+                    <a href="about.html" class="btn btn-blue blue-hover">Learn More</a>
+
+                </div> <!-- END TEXT WIDGET -->
+
+
+                <!-- SIDEBAR TABLE -->
+                <div class="sidebar-table blue-table sidebar-div mb-50">
+
+                    <!-- Title -->
+                    <h5 class="h5-md">Working Time</h5>
+
+                    <!-- Text -->
+                    <p class="p-sm">
+                       Sistemimiz, kullanıcılarına 7/24 erişim sağlayarak çalışma saatlerinizin dışında bile sağlık randevularınızı kolayca alabilmenizi sağlar.
+                    </p>
+
+                    <!-- Table -->
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>Pazartesi</td>
+                            <td> - </td>
+                            <td id="working-time-monday" class="text-right"></td>
+                        </tr>
+                        <tr>
+                            <td>Salı</td>
+                            <td> - </td>
+                            <td id="working-time-tuesday" class="text-right"></td>
+                        </tr>
+                        <tr>
+                            <td>Çarşamba</td>
+                            <td> - </td>
+                            <td id="working-time-wednesday" class="text-right"></td>
+                        </tr>
+                        <tr>
+                            <td>Perşembe</td>
+                            <td>-</td>
+                            <td id="working-time-thursday" class="text-right"></td>
+                        </tr>
+                        <tr>
+                            <td>Cuma</td>
+                            <td>-</td>
+                            <td id="working-time-friday" class="text-right"></td>
+                        </tr>
+                        <tr>
+                            <td>Cumartesi</td>
+                            <td>-</td>
+                            <td id="working-time-saturday" class="text-right"></td>
+                        </tr>
+                        <tr class="last-tr">
+                            <td>Pazar</td>
+                            <td>-</td>
+                            <td id="working-time-sunday" class="text-right"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Title -->
+                    <h5 class="h5-xs">Planlarınız Değerlidir</h5>
+
+                    <!-- Text -->
+                    <p class="p-sm">Çalışma saatlerimiz</p>
+
+                </div> <!-- END SIDEBAR TABLE -->
+
+
+            </aside> <!-- END SIDEBAR -->
+
+
+        </div> <!-- End row -->
+    </div> <!-- End container -->
+</div> <!-- END APPOINTMENT PAGE -->
